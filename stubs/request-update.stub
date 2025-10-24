@@ -1,0 +1,22 @@
+<?php
+
+namespace {{ namespace }};
+
+class {{ class }} extends {{ storeRequest }}
+{
+    public function rules(): array
+    {
+        return [
+            ...parent::rules(),
+        ];
+    }
+
+    protected function prepareForValidation(): void
+    {
+        $this->injectWith();
+
+        $this->merge([
+            //
+        ]);
+    }
+}

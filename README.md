@@ -1,0 +1,1 @@
+<h1>RecipeHub <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" height="40" alt="Laravel logo" style="vertical-align: middle;"> version</h1>

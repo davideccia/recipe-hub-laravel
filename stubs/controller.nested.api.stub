@@ -1,0 +1,39 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use App\Models\{{ parentModel }};
+use App\Http\Controllers\Controller;
+use App\Http\Requests\{{ model }}\{{ model }}IndexRequest;
+use App\Http\Requests\{{ model }}\{{ model }}StoreRequest;
+use App\Http\Resources\{{ model }}Resource;
+use Illuminate\Http\Resources\Json\JsonResource;
+use Illuminate\Http\Request;
+
+class {{ class }} extends Controller
+{
+    public function index({{ modelIndexRequest }} $request, {{ parentModel }} ${{ parentModelVariable }}): JsonResource
+    {
+        $validatedRequestInput = $request->validated();
+        ${{ modelVariable }} = ${{ parentModelVariable }}->{{ hasManyRelation }}();
+
+        if($validatedRequestInput['paginate'] ?? false){
+            ${{ modelVariable }} = ${{ modelVariable }}->paginate($validatedRequestInput['per_page'] ?? 10, page: $validatedRequestInput['page'] ?? 1);
+        }else{
+            ${{ modelVariable }} = ${{ modelVariable }}->get();
+        }
+
+        return {{ model }}Resource::collection(${{ modelVariable }});
+    }
+
+    public function store({{ modelStoreRequest }} $request, {{ parentModel }} ${{ parentModelVariable }}): {{ model }}Resource
+    {
+        $validatedRequestInput = $request->validated();
+        ${{ modelVariable }} = (new {{ model }}())->fill($validatedRequestInput);
+
+        ${{ modelVariable }}->{{ belongsToRelation }}()->associate(${{ parentModelVariable }})->saveOrFail();
+
+        return new {{ model }}Resource(${{ modelVariable }}->loadMissing($validatedRequestInput['with'] ?? []));
+    }
+}

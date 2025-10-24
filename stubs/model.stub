@@ -1,0 +1,28 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Models\Scopes\{{ class }}Scope;
+use App\Observers\{{ class }}Observer;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\ScopedBy;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Model;
+
+#[ScopedBy({{ class }}Scope::class)]
+#[ObservedBy({{ class }}Observer::class)]
+class {{ class }} extends Model
+{
+    use HasUuids;
+
+    protected $fillable = [
+        //
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            //
+        ];
+    }
+}

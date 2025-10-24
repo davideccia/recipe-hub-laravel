@@ -1,0 +1,18 @@
+<?php
+
+namespace {{ namespace }};
+
+use Illuminate\Http\Request;
+use Illuminate\Http\Resources\Json\ResourceCollection;
+
+class {{ class }} extends ResourceCollection
+{
+    public function toArray(Request $request): array
+    {
+        $resourceArray = parent::toArray($request);
+
+        //
+
+        return $resourceArray;
+    }
+}
