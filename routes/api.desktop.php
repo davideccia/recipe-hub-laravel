@@ -31,6 +31,7 @@ Route::middleware(['auth:sanctum', 'abilities:desktop'])->group(function () {
     Route::apiResource('ingredients', IngredientController::class);
 
     Route::post('recipes/{recipe}/add_images', [RecipeController::class, 'addImages']);
+    Route::get('recipes/{recipe}/pdf_export', [RecipeController::class, 'pdfExport']);
     Route::apiResource('recipes', RecipeController::class)->except(['store']);
 
     Route::apiResource('reviews', ReviewController::class)->only(['show', 'update', 'destroy']);

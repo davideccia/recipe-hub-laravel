@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Contracts\HasReviews;
 use App\Models\Scopes\RecipeScope;
 use App\Observers\RecipeObserver;
+use App\Services\Export\Recipe\RecipePdfExport;
 use App\Traits\EnhancedMedia;
 use App\Traits\Reviewable;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
@@ -16,6 +17,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Spatie\MediaLibrary\HasMedia;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 #[ScopedBy(RecipeScope::class)]
 #[ObservedBy(RecipeObserver::class)]
@@ -125,5 +127,10 @@ class Recipe extends Model implements HasMedia, HasReviews
     public function notifiableReviewUser(): User
     {
         return $this->user;
+    }
+
+    public function pdfExport(): BinaryFileResponse
+    {
+        return RecipePdfExport::init($this)->download();
     }
 }

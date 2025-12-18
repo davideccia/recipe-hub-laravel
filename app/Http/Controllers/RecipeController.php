@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Recipe\AddImagesRequest;
 use App\Http\Requests\Recipe\RecipeDestroyRequest;
 use App\Http\Requests\Recipe\RecipeIndexRequest;
+use App\Http\Requests\Recipe\RecipePdfExportRequest;
 use App\Http\Requests\Recipe\RecipeShowRequest;
 use App\Http\Requests\Recipe\RecipeStoreRequest;
 use App\Http\Requests\Recipe\RecipeUpdateRequest;
@@ -12,6 +13,7 @@ use App\Http\Resources\RecipeResource;
 use App\Models\Recipe;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Resources\Json\JsonResource;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class RecipeController extends Controller
 {
@@ -92,5 +94,10 @@ class RecipeController extends Controller
         }
 
         return response()->json(status: 204);
+    }
+
+    public function pdfExport(RecipePdfExportRequest $request, Recipe $recipe): BinaryFileResponse
+    {
+        return $recipe->pdfExport();
     }
 }
