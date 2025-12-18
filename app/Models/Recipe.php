@@ -81,6 +81,11 @@ class Recipe extends Model implements HasMedia, HasReviews
         return $builder->where('recipes.public', false);
     }
 
+    public function scopeDatabaseSearch(Builder $builder, string $search): Builder
+    {
+        return $builder->where('recipes.title', 'ilike', "%{$search}%");
+    }
+
     public function ingredientsBatchSave(array $ingredients, bool $detach = true): void
     {
         if ($detach) {

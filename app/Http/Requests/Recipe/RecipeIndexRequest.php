@@ -22,6 +22,7 @@ class RecipeIndexRequest extends FormRequest
             'paginate' => ['nullable', 'boolean'],
             'per_page' => ['nullable', 'integer'],
             'page' => ['nullable', 'integer'],
+            'search' => ['nullable', 'string'],
             'with' => ['nullable', 'array'],
             'with.*' => ['string', Rule::in([
                 //

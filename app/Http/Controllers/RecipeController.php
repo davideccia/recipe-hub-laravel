@@ -20,6 +20,10 @@ class RecipeController extends Controller
         $validatedRequestInput = $request->validated();
         $recipes = Recipe::query()->with($validatedRequestInput['with'] ?? []);
 
+        if(isset($validatedRequestInput['search'])){
+            $recipes->databaseSearch($validatedRequestInput['search']);
+        }
+
         if ($validatedRequestInput['paginate'] ?? false) {
             $recipes = $recipes->paginate($validatedRequestInput['per_page'] ?? 10, page: $validatedRequestInput['page'] ?? 1);
         } else {

@@ -20,7 +20,6 @@ use Laravel\Sanctum\HasApiTokens;
 #[ObservedBy(UserObserver::class)]
 /**
  * @var UserRoleEnum $role
- *
  * @mixin IdeHelperUser
  */
 class User extends Authenticatable implements HasReviews
